@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo Form</title>
+</head>
+<body>
+    <h1>일정 생성</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label for="{{ form.title.id_for_label }}">일정:</label>
+            {{ form.title }}
+            {% if form.title.errors %}
+                <div class="errors">
+                    {% for error in form.title.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div>
+            <label for="{{ form.description.id_for_label }}">내용:</label><br>
+            {{ form.description }}
+            {% if form.description.errors %}
+                <div class="errors">
+                    {% for error in form.description.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.due_date.id_for_label }}">날짜:</label>
+            {{ form.due_date }}
+            {% if form.due_date.errors %}
+                <div class="errors">
+                    {% for error in form.due_date.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

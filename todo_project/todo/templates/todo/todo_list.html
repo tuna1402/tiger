@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+    <style>
+        .completed {
+            text-decoration: line-through; 
+            color: gray; 
+        }
+        .incomplete {
+            color: black; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Todo 일정</h1>
+    <ul>
+        {% load tz %}
+        {% for todo in todos %}
+            <li class="{% if todo.completed %}completed{% else %}incomplete{% endif %}">
+                {{ todo.title }} - Due: {{ todo.due_date|localtime }}{% if not todo.completed %} - 미완료 일정{% endif %}
+                {% if not todo.completed %}
+                    <a href="{% url 'todo_toggle_complete' todo.id %}">완료 유무</a>
+                {% endif %}
+                <a href="{% url 'todo_update' todo.id %}">수정</a>
+                <a href="{% url 'todo_delete' todo.id %}">삭제</a>
+            </li>   
+        {% endfor %}
+    </ul>
+    <a href="{% url 'todo_create' %}">일정 추가</a>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Todo</title>
+</head>
+<body>
+    <h1>Delete Todo</h1>
+    <p>"{{ todo.title }}" 일정을 삭제 하시겠습니까?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">확인</button>
+        <button type="submit" href="{% url 'todo_list' %}">취소</button>
+    </form>
+    
+</body>
+</html>
