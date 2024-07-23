@@ -3,6 +3,8 @@ from .models import Todo
 from .forms import TodoForm
 from django.utils import timezone
 import pytz
+from rest_framework import viewsets
+from .serializers import TodoSerializer
 
 def todo_list(request):
     todos = Todo.objects.all().order_by('-due_date')
@@ -48,3 +50,6 @@ def todo_toggle_complete(request, pk):
     todo.save()
     return redirect('todo_list')
 
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
